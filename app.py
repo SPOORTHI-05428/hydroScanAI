@@ -53,22 +53,23 @@ def create_app():
     return app
 
 
+app = create_app()
+
+
 # ------------------------------------------------------------
 # RUN SERVER
 # ------------------------------------------------------------
 
 if __name__ == "__main__":
 
-    application = create_app()
-
     print("\n========================================")
     print("HydroScan Flask Server Starting...")
     print("========================================")
-    print("Local URL  : http://127.0.0.1:5000")
-    print("Network URL: http://0.0.0.0:5000")
+    print(f"Local URL  : http://127.0.0.1:{config.FLASK_PORT}")
+    print(f"Network URL: http://{config.FLASK_HOST}:{config.FLASK_PORT}")
     print("========================================\n")
 
-    application.run(
+    app.run(
         host=config.FLASK_HOST,
         port=config.FLASK_PORT,
         debug=config.FLASK_DEBUG,

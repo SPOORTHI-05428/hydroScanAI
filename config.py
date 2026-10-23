@@ -135,9 +135,9 @@ USAGE_LIMITS = {
 # FLASK SETTINGS
 # ------------------------------------------------------------
 
-FLASK_HOST = "0.0.0.0"
-FLASK_PORT = 5000
-FLASK_DEBUG = True
+FLASK_HOST = os.getenv("FLASK_HOST", "0.0.0.0")
+FLASK_PORT = int(os.getenv("PORT", os.getenv("FLASK_PORT", "5000")))
+FLASK_DEBUG = os.getenv("FLASK_DEBUG", "False").lower() in {"1", "true", "yes", "on"}
 
 # Secret key for sessions (change in production)
-SECRET_KEY = "hydroscan-secret-key-change-me"
+SECRET_KEY = os.getenv("SECRET_KEY", "hydroscan-secret-key-change-me")
