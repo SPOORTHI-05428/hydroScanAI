@@ -13,6 +13,14 @@ HydroScan AI is a smart water quality monitoring system that combines ESP32 sens
 
 The project helps monitor key water parameters, detect quality issues, and provide actionable recommendations for safe usage. It is designed for environmental monitoring, smart city applications, and IoT-based water management.
 
+## Live Output
+
+Open the application here:
+
+https://hydroscan-ai.onrender.com
+
+This deployment provides the live dashboard and prediction interface for the project.
+
 ## Overview
 
 Access to clean water is essential for health, agriculture, and daily life. Traditional water testing is often slow and manual. HydroScan AI brings automation to this process by using sensor inputs and intelligent prediction to monitor and evaluate water quality efficiently.
