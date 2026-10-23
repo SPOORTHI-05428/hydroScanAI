@@ -17,7 +17,7 @@ The project helps monitor key water parameters, detect quality issues, and provi
 
 Open the application here:
 
-https://hydroscan-ai.onrender.com
+https://hydroscanai.onrender.com
 
 This deployment provides the live dashboard and prediction interface for the project.
 
