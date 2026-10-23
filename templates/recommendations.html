@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block pagetitle %}<i class="bi bi-lightbulb me-2"></i>Recommendations{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4" data-aos="fade-up">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+                <h5 class="mb-1">AI Recommendations</h5>
+                <span class="text-muted small">Based on latest reading & prediction</span>
+            </div>
+            <button class="btn btn-primary-grad btn-sm" onclick="loadRecommendations()">
+                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+            </button>
+        </div>
+        <div class="mt-1 small text-muted">
+            Prediction: <strong id="prediction-display">--</strong>
+            &nbsp;|&nbsp; Confidence: <strong id="confidence-display">--</strong>
+            &nbsp;|&nbsp; Score: <strong id="score-display">--</strong>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <!-- Explanation -->
+    <div class="col-md-6" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-stars me-1 text-warning"></i>Why (AI Explanation)</div>
+            <div class="card-body">
+                <div id="explanation-summary" class="fw-bold small mb-2">--</div>
+                <ul id="explanation-points" class="list-unstyled mb-0"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-exclamation-triangle me-1 text-danger"></i>Alerts</div>
+            <div class="card-body" id="alerts-list">
+                <div class="text-muted small">No alerts to display.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purification -->
+    <div class="col-md-6" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-funnel me-1 text-primary"></i>Purification Recommendations</div>
+            <div class="card-body" id="purification-list">
+                <div class="text-muted small">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usage -->
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-house-heart me-1 text-success"></i>Water Usage Guidance</div>
+            <div class="card-body" id="usage-list">
+                <div class="text-muted small">Loading...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+.pyc
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Model artifacts and generated files
+*.pkl
+*.log
+*.pdf
+
+# IDE/editor
+.vscode/
+.idea/

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Live Monitor{% endblock %}
+
+{% block pagetitle %}<i class="bi bi-activity me-2"></i>Live Monitoring{% endblock %}
+
+{% block content %}
+
+<!-- Alert Banner -->
+<div id="alertBanner" class="alert alert-danger d-none shadow-sm mb-4" role="alert">
+    <div class="d-flex align-items-center">
+        <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+        <div>
+            <strong>⚠ Water Quality Alert!</strong>
+            <div id="alertMessages" class="small"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Gauge Row -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-speedometer2 me-1"></i>Overall Quality</div>
+            <div class="card-body text-center">
+                <canvas id="scoreGauge" width="220" height="140"></canvas>
+                <div id="score-category" class="score-category fw-bold mt-2">--</div>
+                <div class="small text-muted">Composite Score</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-droplet me-1"></i>Live Sensor Values</div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="display-6 fw-bold" id="sensor-ph">--</div>
+                        <div class="text-muted">pH</div>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="display-6 fw-bold" id="sensor-turbidity">--</div>
+                        <div class="text-muted">Turbidity (NTU)</div>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="display-6 fw-bold" id="sensor-tds">--</div>
+                        <div class="text-muted">TDS (Mg/L)</div>
+                    </div>
+                    <div class="col-6 col-md-3 text-center">
+                        <div class="display-6 fw-bold" id="sensor-temperature">--</div>
+                        <div class="text-muted">Temp (°C)</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="small text-muted">
+                        Last Update: <span id="last-update">--</span>
+                    </div>
+                    <button class="btn btn-primary-grad btn-sm" onclick="refreshLive()">
+                        <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Parameter detail cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-droplet-half me-1"></i>pH Status</div>
+            <div class="card-body">
+                <div class="sensor-value" id="sensor-ph-big">--</div>
+                <div class="small text-muted mt-2">Safe range: 6.5 – 8.5</div>
+                <div class="progress mt-2" style="height:10px">
+                    <div class="progress-bar" id="ph-progress" style="width:50%"></div>
+                </div>
+                <div class="status-badge mt-2" id="sensor-ph-status">--</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-cloud-fog me-1"></i>Turbidity Status</div>
+            <div class="card-body">
+                <div class="sensor-value" id="sensor-turbidity-big">--</div>
+                <div class="small text-muted mt-2">Safe range: 0 – 5 NTU</div>
+                <div class="progress mt-2" style="height:10px">
+                    <div class="progress-bar" id="turbidity-progress" style="width:0%"></div>
+                </div>
+                <div class="status-badge mt-2" id="sensor-turbidity-status">--</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-droplet me-1"></i>TDS Status</div>
+            <div class="card-body">
+                <div class="sensor-value" id="sensor-tds-big">--</div>
+                <div class="small text-muted mt-2">Safe range: 0 – 500 Mg/L</div>
+                <div class="progress mt-2" style="height:10px">
+                    <div class="progress-bar" id="tds-progress" style="width:0%"></div>
+                </div>
+                <div class="status-badge mt-2" id="sensor-tds-status">--</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-thermometer-half me-1"></i>Temperature Status</div>
+            <div class="card-body">
+                <div class="sensor-value" id="sensor-temperature-big">--</div>
+                <div class="small text-muted mt-2">Safe range: 10 – 30 °C</div>
+                <div class="progress mt-2" style="height:10px">
+                    <div class="progress-bar" id="temperature-progress" style="width:0%"></div>
+                </div>
+                <div class="status-badge mt-2" id="sensor-temperature-status">--</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/live.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HydroScan Water Quality</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>💧 HydroScan</h1>
+        <p>IoT Based Water Quality Monitoring System</p>
+    </div>
+
+    <!-- Sensor Card -->
+    <div class="card">
+
+        <h2>Live Sensor Data</h2>
+
+        <div class="sensor-grid">
+
+            <div class="sensor">
+                <h3>pH</h3>
+                <div id="ph" class="value">--</div>
+            </div>
+
+            <div class="sensor">
+                <h3>Turbidity</h3>
+                <div id="turbidity" class="value">--</div>
+                <span>NTU</span>
+            </div>
+
+            <div class="sensor">
+                <h3>TDS</h3>
+                <div id="tds" class="value">--</div>
+                <span>Mg/L</span>
+            </div>
+
+            <div class="sensor">
+                <h3>Temperature</h3>
+                <div id="temperature" class="value">--</div>
+                <span>°C</span>
+            </div>
+
+        </div>
+
+        <button id="predictButton"
+                onclick="predictWaterQuality()">
+            Predict Water Quality
+        </button>
+
+        <div id="loading"
+             class="loading"
+             style="display:none;">
+            Reading ThingSpeak data and running ML model...
+        </div>
+
+    </div>
+
+    <!-- Result -->
+    <div id="resultCard"
+         class="result-card"
+         style="display:none;">
+
+        <h2>Water Quality Result</h2>
+
+        <div id="prediction"
+             class="prediction">
+            --
+        </div>
+
+        <div class="confidence">
+            ML Confidence :
+            <span id="confidence">--</span>
+        </div>
+
+        <div class="timestamp">
+            Last Sensor Update :
+            <span id="timestamp">--</span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function predictWaterQuality() {
+
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("predictButton").disabled = true;
+
+    fetch("/predict")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log("Received:", data);
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("predictButton").disabled = false;
+
+        if (!data.success) {
+
+            alert(data.error);
+            return;
+
+        }
+
+        // Sensor Values
+        document.getElementById("ph").innerText = data.pH;
+        document.getElementById("tds").innerText = data.TDS_mg_L;
+        document.getElementById("turbidity").innerText = data.Turbidity_NTU;
+        document.getElementById("temperature").innerText = data.Temperature_C;
+
+        // Prediction
+        document.getElementById("prediction").innerText = data.prediction;
+
+        // Confidence
+        if (data.confidence != null) {
+            document.getElementById("confidence").innerText =
+                data.confidence + "%";
+        } else {
+            document.getElementById("confidence").innerText = "N/A";
+        }
+
+        // Timestamp
+        document.getElementById("timestamp").innerText =
+            data.timestamp;
+
+        document.getElementById("resultCard").style.display = "block";
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("predictButton").disabled = false;
+
+        console.error(error);
+
+        alert("Connection Error: " + error.message);
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

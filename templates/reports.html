@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block pagetitle %}<i class="bi bi-file-earmark-pdf me-2"></i>PDF Reports{% endblock %}
+
+{% block content %}
+
+<div class="row g-3">
+    <div class="col-md-6" data-aos="fade-up">
+        <div class="card h-100">
+            <div class="card-body text-center py-5">
+                <div class="display-1 text-danger mb-3">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                </div>
+                <h4>Generate PDF Report</h4>
+                <p class="text-muted">
+                    Download a complete water quality report including sensor values,
+                    ML prediction, quality score, and recommendations.
+                </p>
+                <button class="btn btn-danger btn-lg mt-2" onclick="downloadReport()">
+                    <i class="bi bi-download me-1"></i> Download Report
+                </button>
+                <div id="report-status" class="mt-3 small text-muted"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-info-circle me-1"></i>What's Included</div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Report generation date & time</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Latest sensor values (pH, TDS, Turbidity, Temp)</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>ML prediction & confidence</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Water quality score (0-100)</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>AI explanation</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Purification recommendations</li>
+                    <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Water usage guidance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+{% endblock %}
