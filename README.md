@@ -1,21 +1,41 @@
-# HydroScan - Smart Water Quality Monitoring System
+# HydroScan AI
 
-HydroScan is an intelligent water quality monitoring and prediction system built using ESP32, Python, Flask, and Machine Learning. The project analyzes sensor-based water parameters, predicts water quality status, and presents insights through a web dashboard.
+<div align="center">
 
-## Project Overview
+![HydroScan Banner](https://img.shields.io/badge/IoT-Water%20Quality%20Monitoring-blue)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)
+![Flask](https://img.shields.io/badge/Flask-Web%20App-000000)
+![ML](https://img.shields.io/badge/Machine%20Learning-Scikit%20Learn-F7931E)
 
-This system is designed to monitor water quality in a smarter and faster way. It helps users identify whether water is safe for use by combining sensor data with machine learning-based predictions. It also includes historical trends, statistical summaries, and report generation for environmental monitoring.
+</div>
+
+HydroScan AI is a smart water quality monitoring system that combines ESP32 sensor data, machine learning, and a Flask-based web dashboard to predict water safety and visualize quality trends over time.
+
+The project helps monitor key water parameters, detect quality issues, and provide actionable recommendations for safe usage. It is designed for environmental monitoring, smart city applications, and IoT-based water management.
+
+## Overview
+
+Access to clean water is essential for health, agriculture, and daily life. Traditional water testing is often slow and manual. HydroScan AI brings automation to this process by using sensor inputs and intelligent prediction to monitor and evaluate water quality efficiently.
+
+### Main capabilities
+
+- Real-time water quality prediction
+- ESP32 sensor data integration
+- Historical trend tracking
+- Statistical analysis
+- Report generation
+- Recommendation system for safe usage
+- Interactive dashboard UI
 
 ## Features
 
-- Real-time water quality monitoring
-- ESP32-based sensor data support
-- Machine learning prediction of water quality
-- Historical and statistical analysis
-- Report generation
-- Recommendations for safe water usage
-- Flask web dashboard
-- Responsive user interface
+- Predict water quality using a trained ML model
+- Monitor live and historical readings
+- Analyze trends and water quality patterns
+- Generate downloadable reports
+- Display recommendations based on water condition
+- Use Flask for a lightweight web application
+- Support ESP32 and IoT-based monitoring workflows
 
 ## Tech Stack
 
@@ -33,13 +53,15 @@ This system is designed to monitor water quality in a smarter and faster way. It
 ## Project Structure
 
 ```text
-Water ESP32/
+hydroScanAI/
 ├── app.py
 ├── config.py
 ├── main.py
 ├── run.py
-├── requirements.txt
 ├── train.py
+├── requirements.txt
+├── README.md
+├── .gitignore
 ├── dataset/
 │   └── HydroScan Water Quality.csv
 ├── routes/
@@ -72,9 +94,7 @@ Water ESP32/
 ├── hydroscan_label_encoder.pkl
 ├── hydroscan_scaler.pkl
 ├── hydroscan_water_quality_model.pkl
-├── .gitignore
-├── README.md
-└── requirements.txt
+└── TODO.md
 ```
 
 ## Installation
@@ -82,8 +102,8 @@ Water ESP32/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/SPOORTHI-05428/Water-ESP32.git
-cd Water-ESP32
+git clone https://github.com/SPOORTHI-05428/hydroScanAI.git
+cd hydroScanAI
 ```
 
 2. Create a virtual environment:
@@ -94,13 +114,13 @@ python -m venv venv
 
 3. Activate the environment:
 
-Windows (PowerShell):
+On Windows (PowerShell):
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-Linux/macOS:
+On Linux/macOS:
 
 ```bash
 source venv/bin/activate
@@ -114,11 +134,13 @@ pip install -r requirements.txt
 
 ## Run the Application
 
+Start the app with:
+
 ```bash
 python app.py
 ```
 
-or
+or:
 
 ```bash
 python run.py
@@ -130,11 +152,34 @@ Then open:
 http://127.0.0.1:5000
 ```
 
-## Model Training
+## Retrain the Model
+
+To train the model again using the dataset:
 
 ```bash
 python train.py
 ```
+
+## Use Cases
+
+- Smart city water monitoring
+- Residential water safety checking
+- Industrial water quality analysis
+- Agricultural irrigation management
+- Environmental research and reporting
+
+## Why This Project Matters
+
+This project helps bridge the gap between IoT sensing and intelligent environmental decision-making. By turning water quality data into actionable insights, HydroScan AI supports safer communities and smarter resource management.
+
+## Future Improvements
+
+- Real-time cloud data streaming
+- Database integration for persistent storage
+- Mobile app support
+- Advanced alert notifications
+- Enhanced data visualizations
+- Deployment for live production environments
 
 ## Author
 
@@ -142,4 +187,8 @@ SPOORTHI
 
 ## Project Status
 
-Active development / academic IoT and ML project
+Active development project for smart water quality monitoring and AI-driven analysis.
+
+## License
+
+This project is intended for educational and personal use.
